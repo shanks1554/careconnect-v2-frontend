@@ -34,7 +34,9 @@ def chat():
 
         try:
             res = requests.post(CHAT_URL, json={"message": user_msg}, timeout=20)
-            bot_msg = res.json().get("final", "Sorry, something went wrong.")
+            bot_msg_raw = res.json().get("final", "Sorry, something went wrong.")
+            bot_msg = bot_msg_raw.strip().strip('"')
+
         except Exception:
             bot_msg = "Sorry, I couldn't reach the server."
 
